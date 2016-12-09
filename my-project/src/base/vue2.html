@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+  <meta name="format-detection" content="telephone=no">
+  <title>Title</title>
+  <script src="../vue.js"></script>
+  <script>
+    window.onload = function(){
+      var c = new Vue({
+        el:"#box",
+        data:{
+          msg:"welcome vue",
+          msg2: ["me","you","we"],
+          json: {a:"apple",b:"pear",c:"orange"},
+          a: true
+        },
+        methods:{
+          show:function () {
+            this.msg2.push("he");
+          }
+        }
+      })
+    }
+    //指令:扩张html标签的功能、属性
+  </script>
+</head>
+<body>
+<div id="box">
+  <input type="button" value="按钮" v-on:click="show()">
+  <input type="button" value="按钮2" v-on:click="a = false">
+  <div style="width: 50px;height:50px;background-color:#c1c1c1" v-show="a"></div>
+  <ul>
+    <li v-for="value in msg2">
+        {{value}}
+    </li>
+  </ul>
+</div>
+</body>
+</html>
