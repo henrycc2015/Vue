@@ -10,18 +10,26 @@
     window.onload = function(){
       var c = new Vue({
         el:"#box",
+        template: '<li>hello world</li>',
         data:{
           msg:"welcome vue",
           msg2: ["me","you","we"],
           json: {a:"apple",b:"pear",c:"orange"},
-          a: true
+          a: true,
+          message:"hello",
+          componentList:[
+            {text:'vegetable'},
+            {text:'cheese'},
+            {text:'whatever else human are supposed to eat'}
+          ]
         },
         methods:{
           show:function () {
             this.msg2.push("he");
           }
         }
-      })
+      });
+
     }
     //指令:扩张html标签的功能、属性
   </script>
@@ -35,6 +43,11 @@
     <li v-for="value in msg2">
         {{value}}
     </li>
+  </ul>
+  <p>{{message}}</p>
+  <input v-model="message">
+  <ul>
+    <todo-list></todo-list>
   </ul>
 </div>
 </body>

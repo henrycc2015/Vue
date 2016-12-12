@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="format-detection" content="telephone=no">
+  <title>Title</title>
+  <script src="../vue.js"></script>
+  <script>
+    window.onload = function(){
+      //注册一个全局的组件,
+      Vue.component('my-component',{
+        template:'<div>A custom component!</div>'
+
+      })
+
+      new Vue({
+        el:'#example'
+      })
+      //注册一个局部的组件
+      var Child1 = {
+        template: '<ul>A local custom component1</ul>'
+      }
+      new Vue({
+        el:'#example2',
+        components:{
+          'my-component1':Child1,
+          'my-component2':Child2
+        }
+      })
+    }
+
+    //指令:扩张html标签的功能、属性
+  </script>
+</head>
+<body>
+  <div id="example"><my-component></my-component></div>
+  <div id="example2"><my-component1></my-component1></div>
+</body>
+</html>
