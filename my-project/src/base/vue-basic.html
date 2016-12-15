@@ -10,22 +10,39 @@
     window.onload = function(){
       var c = new Vue({
         el:"#box",
-        template: '<li>hello world</li>',
         data:{
           msg:"welcome vue",
           msg2: ["me","you","we"],
           json: {a:"apple",b:"pear",c:"orange"},
           a: true,
+          seen:true,
           message:"hello",
+          url:'http://www.baidu.com',
           componentList:[
             {text:'vegetable'},
             {text:'cheese'},
             {text:'whatever else human are supposed to eat'}
           ]
         },
+        filters:{
+          capitalize: function(value){
+            if(!value){
+              return;
+            }
+            return value.charAt(0).toUpperCase() + value.slice(1);
+          }
+        },
+        computed:{
+          reverseMessage:function(){
+            return this.message.split('').reverse().join('');
+          }
+        },
         methods:{
           show:function () {
             this.msg2.push("he");
+          },
+          doSomething:function(value){
+            alert(value);
           }
         }
       });
@@ -36,19 +53,20 @@
 </head>
 <body>
 <div id="box">
-  <input type="button" value="按钮" v-on:click="show()">
+  <!--<input type="button" value="按钮" v-on:click="show()">
   <input type="button" value="按钮2" v-on:click="a = false">
-  <div style="width: 50px;height:50px;background-color:#c1c1c1" v-show="a"></div>
+  <div style="width: 50px;height:50px;background-color:#c1c1c1" v-show="a"></div>-->
   <ul>
-    <li v-for="value in msg2">
-        {{value}}
+    <li v-for="value in msg2" v-on:click='doSomething(value)'>
+        {{value|capitalize}}
     </li>
   </ul>
-  <p>{{message}}</p>
+  <p>original message:{{message}}</p>
+  <p>reversed message:{{reverseMessage}}</p>
+
   <input v-model="message">
-  <ul>
-    <todo-list></todo-list>
-  </ul>
+
+  <a v-if="seen" v-bind:href="url">Now you see me</a>
 </div>
 </body>
 </html>
